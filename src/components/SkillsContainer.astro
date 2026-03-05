@@ -1,0 +1,22 @@
+---
+interface Skill {
+  name: string;
+  icon: any;
+}
+
+const { title, skills = [] as Skill[] } = Astro.props as { title: string; skills?: Skill[];};
+---
+
+<div class="w-full bg-transparent p-4">
+  <h2 class="text-xl font-semibold mb-6 text-start">{title}</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+    {skills.map((skill) => (
+      <div class="flex flex-col items-center text-center">
+        <div class="mb-2">
+          <skill.icon class="size-10"/>
+        </div>
+        <span class="text-sm">{skill.name}</span>
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<article class="w-full">
+  <div class="flex flex-col gap-6">
+    <form id="contact-form" class="flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <label for="email" class="text-sm font-semibold">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="tu@email.com"
+          required
+          class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="subject" class="text-sm font-semibold">Asunto</label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          placeholder="Asunto del mensaje"
+          required
+          class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-sm font-semibold">Mensaje</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Tu mensaje aquí..."
+          rows="6"
+          required
+          class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+        ></textarea>
+      </div>
+
+      <button
+        id="submit-btn"
+        type="submit"
+        class="px-6 py-2 rounded-lg bg-red-600 hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-500 text-white font-semibold transition-colors duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Enviar
+      </button>
+    </form>
+  </div>
+</article>
+
+<div
+  id="snackbar"
+  class="fixed top-16 left-1/2 transform -translate-x-1/2 -translate-y-10 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300 opacity-0 pointer-events-none"
+>
+  <span id="snackbar-message"></span>
+</div>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+  const snackbar = document.getElementById("snackbar") as HTMLDivElement;
+  const snackbarMessage = document.getElementById("snackbar-message") as HTMLSpanElement;
+
+  function showSnackbar(message: string, isSuccess: boolean) {
+    snackbarMessage.textContent = message;
+
+    if (isSuccess) {
+      snackbar.classList.remove("bg-red-500");
+      snackbar.classList.add("bg-green-500");
+    } else {
+      snackbar.classList.remove("bg-green-500");
+      snackbar.classList.add("bg-red-500");
+    }
+
+    snackbar.classList.remove("opacity-0", "pointer-events-none", "-translate-y-10");
+    snackbar.classList.add("opacity-100", "translate-y-0");
+
+    setTimeout(() => {
+      snackbar.classList.add("opacity-0", "pointer-events-none", "-translate-y-10");
+      snackbar.classList.remove("opacity-100", "translate-y-0");
+    }, 4000);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "Mensaje enviándose...";
+    submitBtn.disabled = true;
+
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+    const subject = (document.getElementById("subject") as HTMLInputElement).value;
+    const message = (document.getElementById("message") as HTMLTextAreaElement).value;
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          subject,
+          message,
+        }),
+      });
+
+      if (response.ok) {
+        showSnackbar("¡Email enviado con éxito!", true);
+        form.reset();
+      } else {
+        const error = await response.json();
+        showSnackbar(error.message || "Error al enviar el email", false);
+      }
+    } catch (error) {
+      showSnackbar("Error al enviar el email", false);
+      console.error("Error:", error);
+    } finally {
+      submitBtn.innerText = originalBtnText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>

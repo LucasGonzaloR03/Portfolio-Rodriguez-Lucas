@@ -1,0 +1,146 @@
+---
+import Code from './icons/Code.astro';
+import CSSIcon from './icons/CSS.astro';
+import GitHub from './icons/GitHub.astro';
+import Go from './icons/Go.astro';
+import Kotlin from './icons/Kotlin.astro';
+import MaterialUI from './icons/MaterialUI.astro';
+import MongoDB from './icons/MongoDB.astro';
+import Neo4J from './icons/Neo4j.astro';
+import PostgreSQL from './icons/PostgreSQL.astro';
+import Python from './icons/Python.astro';
+import React from './icons/React.astro';
+import Redis from './icons/Redis.astro';
+import CIcon from './icons/C.astro';
+import Angular from './icons/Angular.astro';
+import Svelte from './icons/Svelte.astro';
+import HTMLIcon from './icons/HTML.astro';
+import Vitest from './icons/Vitest.astro';
+import Git from './icons/Git.astro';
+import TypeScript from './icons/TypeScript.astro';
+import SkillsContainer from './SkillsContainer.astro';
+import Docker from './icons/Docker.astro';
+import Vite from './icons/Vite.astro';
+import JIRAIcon from './icons/JIRA.astro';
+import Arduino from './icons/Arduino.astro';
+import Postman from './icons/Postman.astro';
+import SpringBoot from './icons/SpringBoot.astro';
+import Nodejs from './icons/Nodejs.astro';
+
+const frontendSkills = [
+    {
+        name: 'React',
+        icon: React
+    },
+    {
+        name: 'Angular',
+        icon: Angular
+    },
+    {
+        name: 'Svelte',
+        icon: Svelte
+    },
+    {
+        name: 'TypeScript',
+        icon: TypeScript
+    },
+    {
+        name: 'HTML',
+        icon: HTMLIcon
+    },
+    {
+        name: 'CSS',
+        icon: CSSIcon
+    },
+    {
+        name: 'Material UI',
+        icon: MaterialUI
+    },
+    {
+        name: 'Vitest',
+        icon: Vitest
+    },
+    {
+        name: 'Node.js',
+        icon: Nodejs
+    }
+]
+
+const backendSkills = [
+    {
+        name: 'Kotlin',
+        icon: Kotlin
+    },
+    {
+        name: 'Go',
+        icon: Go
+    },
+    {
+        name: 'C',
+        icon: CIcon
+    },
+    {
+        name: 'Python',
+        icon: Python
+    }
+]
+
+const databaseSkills = [
+    {
+        name: 'PostgreSQL',
+        icon: PostgreSQL
+    },
+    {
+        name: 'MongoDB',
+        icon: MongoDB
+    },
+    {
+        name: 'Redis',
+        icon: Redis
+    },
+    {
+        name: 'Neo4j',
+        icon: Neo4J
+    }
+]
+
+const otherSkills = [
+    {
+        name: 'Git',
+        icon: Git
+    },
+    {
+        name: 'GitHub',
+        icon: GitHub
+    },
+    {
+        name: 'Docker',
+        icon: Docker
+    },
+    {
+        name: 'Vite',
+        icon: Vite
+    },
+    {
+        name: 'JIRA',
+        icon: JIRAIcon
+    },
+    {
+        name: 'Arduino',
+        icon: Arduino
+    },
+    {
+        name: 'Spring Boot',
+        icon: SpringBoot
+    },
+    {
+        name: 'Postman',
+        icon: Postman
+    }
+]
+---
+
+<SkillsContainer title="Frontend" skills={frontendSkills} /> 
+<SkillsContainer title="Backend" skills={backendSkills} />
+<SkillsContainer title="Bases de Datos" skills={databaseSkills} />
+<SkillsContainer title="Otras Habilidades" skills={otherSkills} />

@@ -1,0 +1,176 @@
+---
+import GitHub from "./icons/GitHub.astro"
+import NextJS from "./icons/NextJS.astro"
+import Tailwind from "./icons/Tailwind.astro"
+import Kotlin from "./icons/Kotlin.astro"
+import PostgreSQL from "./icons/PostgreSQL.astro"
+import MongoDB from "./icons/MongoDB.astro"
+import Redis from "./icons/Redis.astro"
+import Neo4j from "./icons/Neo4j.astro"
+import TypeScript from "./icons/TypeScript.astro"
+import CSSIcon from "./icons/CSS.astro"
+import MaterialUI from "./icons/MaterialUI.astro"
+import React from "./icons/React.astro"
+import Python from "./icons/Python.astro"
+import Go from "./icons/Go.astro"
+import LinkButton from "./LinkButton.astro"
+
+const TAGS = {
+  NEXT: {
+    name: "Next.js",
+    class: "bg-black text-white",
+    icon: NextJS,
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-[#003159] text-white",
+    icon: Tailwind,
+  },
+  CSS: {
+    name: "CSS",
+    class: "bg-[#264de4] text-white",
+    icon: CSSIcon,
+  },
+  REACT: {
+    name: "React",
+    class: "bg-[#282C34] text-white",
+    icon: React,
+  },
+  KOTLIN: {
+    name: "Kotlin",
+    class: "bg-[#0095D5] text-white",
+    icon: Kotlin,
+  },
+  GO: {
+    name: "Go",
+    class: "bg-[#00ADD8] text-white",
+    icon: Go,
+  },
+  POSTGRESQL: {
+    name: "PostgreSQL",
+    class: "bg-[#336791] text-white",
+    icon: PostgreSQL,
+  },
+  MONGODB: {
+    name: "MongoDB",
+    class: "bg-[#47A248] text-white",
+    icon: MongoDB,
+  },
+  REDIS: {
+    name: "Redis",
+    class: "bg-[#DD0000] text-white",
+    icon: Redis,
+  },
+  NEO4J: {
+    name: "Neo4j",
+    class: "bg-[#00BDB3] text-white",
+    icon: Neo4j,
+  },
+  TYPESCRIPT: {
+    name: "TypeScript",
+    class: "bg-[#3178c6] text-white",
+    icon: TypeScript,
+  },
+  PYTHON: {
+    name: "Python",
+    class: "bg-[#3776AB] text-white",
+    icon: Python,
+  },
+  MATERIALUI: {
+    name: "Material UI",
+    class: "bg-[#1976D2] text-white",
+    icon: MaterialUI,
+  },
+}
+const PROJECTS = [
+  {
+    title: "Uberto Backend - Gestión de reservas de viajes.",
+    description: "Backend en Kotlin/Spring Boot con API modular. Integra PostgreSQL, MongoDB, Redis y Neo4j. Incluye seguridad, optimización de rendimiento y buenas prácticas de arquitectura.",
+    github: "https://github.com/LucasGonzaloR03/Uberto-Backend-PHM-UNSAM",
+    image: "/projects/uberto-backend.webp",
+    tags: [TAGS.KOTLIN, TAGS.POSTGRESQL, TAGS.MONGODB, TAGS.REDIS, TAGS.NEO4J],
+  },
+  {
+    title: "Uberto Frontend - Gestión de reservas de viajes.",
+    description: "Frontend web que consume API REST del backend Uberto. Interfaz para administrar usuarios, choferes y viajes. Desarrollado con React, TypeScript, Material UI y CSS. Aplicando buenas prácticas de arquitectura, testing y comunicación eficiente.",
+    github: "https://github.com/LucasGonzaloR03/Uberto-Frontend-PHM-UNSAM",
+    image: "/projects/uberto-frontend.webp",
+    tags: [TAGS.REACT, TAGS.TYPESCRIPT, TAGS.MATERIALUI, TAGS.CSS],
+  },
+  {
+    title: "MusicAr - Gestión de equipos musicales",
+    description: "Aplicación en Kotlin para modelar y gestionar equipos musicales. Proyecto académico aplicando OOP, modelado de dominio, testing automatizado y buenas prácticas de diseño.",
+    github: "https://github.com/LucasGonzaloR03/MusicAr-Algoritmos-II-UNSAM",
+    image: "/projects/musicAr.webp",
+    tags: [TAGS.KOTLIN],
+  },
+  {
+    title: "Expectativa de Inflación en Argentina(2017-2023)",
+    description: "Aplicación Python para calcular expectativas de inflación en Argentina (2017-2023). Algoritmos de optimización, modelado matemático con librerias como NumPy, Matplotlib, entre otras.",
+    github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-N-1-Matematica-III-UNSAM",
+    image: "/projects/expectativa inflacionaria.webp",
+    tags: [TAGS.PYTHON],
+  },
+  {
+    title: "Prediccion de Cambio Climático en Argentina",
+    description: "Análisis de variables meteorológicas de Buenos Aires (1991-2023) con modelos predictivos. Identifica tendencias climáticas y genera predicciones. Interfaz interactiva con Python, Pandas, NumPy, Matplotlib y Scikit-Learn.",
+    github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-N-2-Matematica-III-UNSAM",
+    image: "/projects/cambio climatico.webp",
+    tags: [TAGS.PYTHON],
+  },
+  {
+    title: "Canales en Go - Trabajo Practico sobre Go Routines y Canales",
+    description: "Implementación de algoritmos clásicos utilizando Go Routines y Canales. Ejemplos incluyen Productor-Consumidor y buffer sobre los canales. Proyecto académico para entender concurrencia y comunicación en Go.",
+    github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-de-Canales-Seminario-de-Programacion-UNSAM",
+    image: "/projects/canales.webp",
+    tags: [TAGS.GO],
+  },
+]
+---
+
+<div class="flex flex-col gap-y-16">
+  {
+    PROJECTS.map(({ image, title, description, tags, github }) => (
+    <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+  <div class="w-full md:w-1/2">
+    <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+      <img alt="imagen-proyecto" class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" loading="lazy" src={image} />
+    </div>
+  </div>
+
+  <div class="w-full md:w-1/2 md:max-w-lg">
+    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+      {title}
+    </h3>
+    <div class="flex flex-wrap mt-2">
+      <ul class="flex flex-row mb-2 gap-x-2">
+          {tags?.map((tag) => (
+            <li>
+              <span
+                class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+              >
+                <tag.icon class="size-4" />
+                {tag.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+      <div class="mt-2 text-gray-700 dark:text-gray-200">{description}</div>
+      <footer class="flex items-end justify-start mt-4 gap-x-4">
+          {github && (
+            <LinkButton href={github}>
+              <GitHub class="size-6" />
+              Codigo
+            </LinkButton>
+          )}
+        </footer>
+    </div>
+  </div>
+</article>
+    ))
+  }
+</div>
+
+
+
