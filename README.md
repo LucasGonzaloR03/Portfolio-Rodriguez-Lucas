@@ -1,7 +1,7 @@
 # 👨🏻‍💻 Porfolio de Rodriguez Lucas Gonzalo
 
 <div align="center">
-<a href="https://porfolio.dev/">
+<a href="https://portfolio-rodriguez-lucas.vercel.app/">
 <img src="./public/porfolio.webp">
 </a>
 <p></p>
