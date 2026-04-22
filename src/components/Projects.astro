@@ -14,6 +14,8 @@ import React from "./icons/React.astro"
 import Python from "./icons/Python.astro"
 import Go from "./icons/Go.astro"
 import LinkButton from "./LinkButton.astro"
+import Nodejs from "./icons/Nodejs.astro"
+import Docker from "./icons/Docker.astro"
 
 const TAGS = {
   NEXT: {
@@ -81,6 +83,16 @@ const TAGS = {
     class: "bg-[#1976D2] text-white",
     icon: MaterialUI,
   },
+    NODE: {
+    name: "Node.js",
+    class: "bg-[#339933] text-white",
+    icon: Nodejs,
+  },
+  DOCKER: {
+    name: "Docker",
+    class: "bg-[#2496ED] text-white",
+    icon: Docker,
+  },
 }
 const PROJECTS = [
   {
@@ -124,6 +136,13 @@ const PROJECTS = [
     github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-de-Canales-Seminario-de-Programacion-UNSAM",
     image: "/projects/canales.webp",
     tags: [TAGS.GO],
+  },
+  {
+    title: "Image Tool - Procesamiento de imágenes",
+    description: "Herramienta web para subir, mejorar y eliminar el fondo de imágenes. Arquitectura de microservicios con Node.js y Python, frontend moderno y despliegue con Docker.",
+    github: "https://github.com/LucasGonzaloR03/image-tool",
+    image: "/projects/image-tool.webp",
+    tags: [TAGS.NODE, TAGS.PYTHON, TAGS.REACT, TAGS.DOCKER],
   },
 ]
 ---
