@@ -1,5 +1,5 @@
 ---
-const personalImageAlt = "Lucas Rodriguez"
+import { Image } from "astro:assets"
 import Badge from "@/components/Badge.astro"
 import LinkedInIcon from "@/components/icons/LinkedIn.astro"
 import MailIcon from "@/components/icons/Mail.astro"
@@ -10,10 +10,13 @@ import CurriculumIcon from "./icons/Curriculum.astro"
 
 <div class="max-w-xl">
   <div class="flex gap-4 mb-4">
-    <img
-      class="rounded-full shadow-lg size-16"
+    <Image
       src="/Rodriguez Lucas - V2.webp"
-      alt={personalImageAlt}
+      alt="Lucas Rodriguez"
+      width={64}
+      height={64}
+      loading="eager"
+      class="rounded-full shadow-lg size-16"
     />
     <a
       href="https://www.linkedin.com/in/lucasgonzalor03"
@@ -32,7 +35,7 @@ import CurriculumIcon from "./icons/Curriculum.astro"
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
-    Técnico en Programación Informática egresado de la UNSAM (Buenos Aires, Argentina). <strong>Actualmente en búsqueda de mi primer puesto como desarrollador full‑stack, abierto a nuevas experiencias y aprendizajes, con disposición para dominar nuevas tecnologías.</strong> Tengo conocimientos en React.js, Kotlin, PostgreSQL, entre otros. Resido en Buenos Aires, Argentina.
+    <strong>Desarrollador Full-Stack</strong> egresado de la UNSAM (Buenos Aires, Argentina) y <strong>Ayudante de Cátedra</strong> en materias de desarrollo web y bases de datos. Apasionado por construir software de calidad con Kotlin, Spring Boot, React y más. Busco mi primer puesto profesional para seguir creciendo.
   </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="#contacto" target="_self">

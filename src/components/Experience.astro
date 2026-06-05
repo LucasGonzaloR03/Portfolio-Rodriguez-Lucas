@@ -1,0 +1,61 @@
+---
+interface ExperienceItem {
+  title: string
+  company: string
+  period: string
+  description: string[]
+}
+
+const experiences: ExperienceItem[] = [
+  {
+    title: "Ayudante de Cátedra — Algoritmos 3",
+    company: "Universidad Nacional de San Martín (UNSAM)",
+    period: "2025 — Presente",
+    description: [
+      "Asistencia docente en la materia de desarrollo web full-stack (frontend y backend).",
+      "Guía a estudiantes en tecnologías como React, TypeScript, Node.js y diseño de APIs REST.",
+      "Corrección de trabajos prácticos y evaluación de proyectos finales.",
+    ],
+  },
+  {
+    title: "Ayudante de Cátedra — Programación con Herramientas Modernas (PHM)",
+    company: "Universidad Nacional de San Martín (UNSAM)",
+    period: "2026 — Presente",
+    description: [
+      "Asistencia docente en bases de datos relacionales y no relacionales (PostgreSQL, MongoDB, Redis).",
+      "Soporte en arquitecturas backend y tecnologías modernas como Spring Boot y Docker.",
+      "Resolución de consultas técnicas y acompañamiento en proyectos de los estudiantes.",
+    ],
+  },
+]
+---
+
+<div class="flex flex-col gap-y-12">
+  {
+    experiences.map((exp) => (
+      <article class="flex flex-col md:flex-row gap-6 md:gap-10">
+        <div class="md:w-1/3 flex flex-col gap-1">
+          <span class="text-sm text-yellow-600 dark:text-yellow-400 font-mono font-semibold">
+            {exp.period}
+          </span>
+          <span class="text-xs text-gray-500 dark:text-gray-400 leading-snug">
+            {exp.company}
+          </span>
+        </div>
+        <div class="md:w-2/3">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+            {exp.title}
+          </h3>
+          <ul class="flex flex-col gap-1">
+            {exp.description.map((item) => (
+              <li class="text-gray-600 dark:text-gray-300 text-sm flex gap-2">
+                <span class="text-yellow-500 mt-1">▹</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    ))
+  }
+</div>

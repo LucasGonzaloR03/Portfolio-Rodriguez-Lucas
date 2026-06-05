@@ -12,26 +12,44 @@ import Skills from "@/components/Skills.astro"
 import Brain from "@/components/icons/Brain.astro"
 import Contact from "@/components/Contact.astro"
 import Mail from "@/components/icons/Mail.astro"
+import Experience from "@/components/Experience.astro"
+import Briefcase from "@/components/icons/Briefcase.astro"
+import Languages from "@/components/Languages.astro"
+import Globe from "@/components/icons/Globe.astro"
 ---
 
 <Layout
-  title="Porfolio de Rodriguez Lucas - Tecnico en programacion informatica"
-  description="Contrata a Rodriguez Lucas con conocimientos en desarrollo full-stack junior, con experiencia en proyectos personales y habilidades en tecnologías como TypeScript, React, Angular, PostgresSQL, Kotlin y mas. ¡Descubre cómo puedo contribuir a tu equipo!"
+  title="Portfolio de Rodriguez Lucas - Desarrollador Full-Stack"
+  description="Portfolio de Lucas Gonzalo Rodriguez, Técnico en Programación Informática egresado de la UNSAM. Desarrollador full-stack con experiencia en Kotlin, Spring Boot, React, TypeScript, PostgreSQL, MongoDB y más. Ayudante de Cátedra en UNSAM. En búsqueda de su primer puesto como desarrollador."
 >
   <main class="px-4">
     <SectionContainer class="py-16 md:py-36" id="inicio">
-      <Hero>
-      </slot>
-    </Hero>
+      <Hero />
     </SectionContainer>
 
     <div class="space-y-24">
+    <SectionContainer id="experiencia">
+      <TitleSection>
+        <Briefcase class="size-7" />
+        Experiencia
+      </TitleSection>
+      <Experience />
+    </SectionContainer>
+
     <SectionContainer id="habilidades">
       <TitleSection>
         <Brain class="size-7" />
         Habilidades
       </TitleSection>
       <Skills />
+    </SectionContainer>
+
+    <SectionContainer id="idiomas">
+      <TitleSection>
+        <Globe class="size-7" />
+        Idiomas
+      </TitleSection>
+      <Languages />
     </SectionContainer>
 
     <SectionContainer id="proyectos">

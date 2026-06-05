@@ -2,64 +2,182 @@
 import ThemeToggle from "./ThemeToggle.astro"
 
 const navItems = [
-  {
-    title: "Inicio",
-    label: "inicio",
-    url: "/#inicio",
-  },
-  {
-    title: "Habilidades",
-    label: "habilidades",
-    url: "/#habilidades",
-  },
-  {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
-  },
-  {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "/#contacto",
-  },
+  { title: "Inicio", label: "inicio", url: "/#inicio" },
+  { title: "Experiencia", label: "experiencia", url: "/#experiencia" },
+  { title: "Habilidades", label: "habilidades", url: "/#habilidades" },
+  { title: "Idiomas", label: "idiomas", url: "/#idiomas" },
+  { title: "Proyectos", label: "proyectos", url: "/#proyectos" },
+  { title: "Sobre mí", label: "sobre-mi", url: "/#sobre-mi" },
+  { title: "Contacto", label: "contacto", url: "/#contacto" },
 ]
 ---
 
-<header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
->
+<header class="fixed top-0 z-10 w-full mt-2 px-4">
+
+  <!-- ===================== DESKTOP ===================== -->
   <nav
-    class="flex px-3 text-xs md:text-base font-light md:font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
+    id="desktop-nav"
+    class="hidden md:flex px-3 text-base font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
   >
-    {
-      navItems.map((link) => (
-        <a
-          class="relative block px-2 py-2 transition hover:text-red-500 dark:hover:text-red-500"
-          aria-label={link.label}
-          href={link.url}
-        >
-          {link.title}
-        </a>
-      ))
-    }
+    {navItems.map((link) => (
+      <a
+        class="relative block px-2 py-2 transition hover:text-red-500 dark:hover:text-red-500"
+        aria-label={link.label}
+        href={link.url}
+      >
+        {link.title}
+      </a>
+    ))}
+    <!-- UNA SOLA instancia de ThemeToggle, solo aquí -->
     <ThemeToggle />
   </nav>
+
+  <!-- ===================== MOBILE BAR ===================== -->
+  <div class="flex md:hidden w-full items-center justify-between px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/90 backdrop-blur shadow-md ring-1 ring-black/10 dark:ring-white/10">
+    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Portfolio Lucas Rodriguez</span>
+    <div class="flex items-center gap-2">
+
+      <!--
+        Botón de tema MOBILE: completamente independiente del ThemeToggle.
+        Lee y escribe localStorage directamente. No comparte ningún ID ni clase
+        con el ThemeToggle del desktop.
+      -->
+      <button
+        id="mobile-cycle-theme"
+        aria-label="Cambiar tema"
+        class="appearance-none border-none p-1 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:scale-125 transition"
+      >
+        <svg id="mcycle-sun" xmlns="http://www.w3.org/2000/svg" class="size-5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg id="mcycle-dark" xmlns="http://www.w3.org/2000/svg" class="size-5 absolute transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="mcycle-system" xmlns="http://www.w3.org/2000/svg" class="size-5 absolute transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="M8 21h8M12 17v4"/>
+        </svg>
+      </button>
+
+      <!-- Hamburger -->
+      <button
+        id="menu-toggle"
+        aria-label="Abrir menú"
+        class="p-1 rounded-lg text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition"
+      >
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="size-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== MOBILE DROPDOWN ===================== -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden absolute top-14 left-4 right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur rounded-2xl shadow-xl ring-1 ring-black/10 dark:ring-white/10 py-2 flex-col"
+  >
+    {navItems.map((link) => (
+      <a
+        class="mobile-nav-link block px-6 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"
+        aria-label={link.label}
+        href={link.url}
+      >
+        {link.title}
+      </a>
+    ))}
+  </div>
+
 </header>
 
+<script is:inline>
+  // ── Mobile theme cycle ──────────────────────────────────────────────────────
+  // Completamente independiente. No usa ningún ID del ThemeToggle desktop.
+  // Cicla: light → dark → system → light en cada tap.
+
+  const CYCLE = ["light", "dark", "system"]
+
+  const getMobileTheme = () => localStorage.getItem("theme") ?? "system"
+
+  const applyMobileTheme = (theme) => {
+    const isDark =
+      theme === "dark" ||
+      (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark")
+  }
+
+  const syncMobileCycleIcon = () => {
+    const theme = getMobileTheme()
+    const map = { light: "mcycle-sun", dark: "mcycle-dark", system: "mcycle-system" }
+    ;["mcycle-sun", "mcycle-dark", "mcycle-system"].forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) el.style.scale = id === map[theme] ? "1" : "0"
+    })
+  }
+
+  const initMobileCycle = () => {
+    syncMobileCycleIcon()
+    const btn = document.getElementById("mobile-cycle-theme")
+    if (!btn) return
+    // Evitar listeners duplicados
+    btn.replaceWith(btn.cloneNode(true))
+    document.getElementById("mobile-cycle-theme").addEventListener("click", (e) => {
+      e.stopPropagation()
+      const current = getMobileTheme()
+      const next = CYCLE[(CYCLE.indexOf(current) + 1) % CYCLE.length]
+      localStorage.setItem("theme", next)
+      applyMobileTheme(next)
+      syncMobileCycleIcon()
+    })
+  }
+
+  initMobileCycle()
+  document.addEventListener("astro:after-swap", initMobileCycle)
+</script>
+
 <script>
+  // ── Hamburger ───────────────────────────────────────────────────────────────
   document.addEventListener("astro:page-load", () => {
+    const toggle = document.getElementById("menu-toggle")
+    const menu = document.getElementById("mobile-menu")
+    const iconOpen = document.getElementById("icon-open")
+    const iconClose = document.getElementById("icon-close")
+
+    const closeMenu = () => {
+      menu?.classList.add("hidden")
+      menu?.classList.remove("flex")
+      iconOpen?.classList.remove("hidden")
+      iconClose?.classList.add("hidden")
+    }
+
+    toggle?.addEventListener("click", () => {
+      const isOpen = !menu?.classList.contains("hidden")
+      if (isOpen) {
+        closeMenu()
+      } else {
+        menu?.classList.remove("hidden")
+        menu?.classList.add("flex")
+        iconOpen?.classList.add("hidden")
+        iconClose?.classList.remove("hidden")
+      }
+    })
+
+    document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      link.addEventListener("click", closeMenu)
+    })
+
+    // ── Active section highlight ────────────────────────────────────────────
     const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
+    const allNavLinks = document.querySelectorAll("header nav a, .mobile-nav-link")
 
     const callback = (entries: any[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          navItems.forEach((item) => {
+          allNavLinks.forEach((item) => {
             if (item.getAttribute("aria-label") == entry.target.id) {
               item.classList.add("text-red-500")
             } else {
@@ -76,30 +194,26 @@ const navItems = [
       threshold: 0,
     })
 
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
+    sections.forEach((section) => observer.observe(section))
 
     document.onvisibilitychange = () => {
       if (document.visibilityState === "hidden") {
         observer.disconnect()
       } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
+        sections.forEach((section) => observer.observe(section))
       }
     }
   })
 </script>
 
 <style>
-  nav {
+  #desktop-nav {
     animation: nav-shadown 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
   }
 
-  nav {
+  #desktop-nav {
     @apply dark:bg-gray-800/90 bg-white/50;
   }
 

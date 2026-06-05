@@ -16,6 +16,7 @@ import Go from "./icons/Go.astro"
 import LinkButton from "./LinkButton.astro"
 import Nodejs from "./icons/Nodejs.astro"
 import Docker from "./icons/Docker.astro"
+import { Image } from "astro:assets"
 
 const TAGS = {
   NEXT: {
@@ -96,50 +97,50 @@ const TAGS = {
 }
 const PROJECTS = [
   {
-    title: "Uberto Backend - Gestión de reservas de viajes.",
-    description: "Backend en Kotlin/Spring Boot con API modular. Integra PostgreSQL, MongoDB, Redis y Neo4j. Incluye seguridad, optimización de rendimiento y buenas prácticas de arquitectura.",
+    title: "Uberto Backend — Plataforma de reservas de viajes",
+    description: "API REST en Kotlin/Spring Boot que gestiona usuarios, choferes y viajes en tiempo real. Combina cuatro bases de datos: PostgreSQL para datos transaccionales, MongoDB para perfiles de usuario, Redis para cachear rutas frecuentes y Neo4j para recomendaciones basadas en grafos. Incluye autenticación con Spring Security y arquitectura modular por capas.",
     github: "https://github.com/LucasGonzaloR03/Uberto-Backend-PHM-UNSAM",
     image: "/projects/uberto-backend.webp",
     tags: [TAGS.KOTLIN, TAGS.POSTGRESQL, TAGS.MONGODB, TAGS.REDIS, TAGS.NEO4J],
   },
   {
-    title: "Uberto Frontend - Gestión de reservas de viajes.",
-    description: "Frontend web que consume API REST del backend Uberto. Interfaz para administrar usuarios, choferes y viajes. Desarrollado con React, TypeScript, Material UI y CSS. Aplicando buenas prácticas de arquitectura, testing y comunicación eficiente.",
+    title: "Uberto Frontend — Interfaz web para gestión de viajes",
+    description: "SPA en React + TypeScript que consume la API REST de Uberto. Permite administrar usuarios, choferes y viajes con una interfaz responsiva construida con Material UI. Implementa manejo de estado, llamadas asíncronas a la API, testing de componentes y separación clara entre lógica y presentación.",
     github: "https://github.com/LucasGonzaloR03/Uberto-Frontend-PHM-UNSAM",
     image: "/projects/uberto-frontend.webp",
     tags: [TAGS.REACT, TAGS.TYPESCRIPT, TAGS.MATERIALUI, TAGS.CSS],
   },
   {
-    title: "MusicAr - Gestión de equipos musicales",
-    description: "Aplicación en Kotlin para modelar y gestionar equipos musicales. Proyecto académico aplicando OOP, modelado de dominio, testing automatizado y buenas prácticas de diseño.",
+    title: "MusicAr — Gestión de equipos musicales",
+    description: "Aplicación en Kotlin para modelar grupos musicales con roles, instrumentos y contratos. El foco estuvo en el diseño orientado a objetos: herencia, polimorfismo, colecciones tipadas y cobertura con tests unitarios. Proyecto académico que sirvió como base de mi formación en diseño de dominio.",
     github: "https://github.com/LucasGonzaloR03/MusicAr-Algoritmos-II-UNSAM",
     image: "/projects/musicAr.webp",
     tags: [TAGS.KOTLIN],
   },
   {
-    title: "Expectativa de Inflación en Argentina(2017-2023)",
-    description: "Aplicación Python para calcular expectativas de inflación en Argentina (2017-2023). Algoritmos de optimización, modelado matemático con librerias como NumPy, Matplotlib, entre otras.",
+    title: "Expectativa de Inflación en Argentina (2017–2023)",
+    description: "Herramienta en Python para calcular y visualizar expectativas de inflación usando datos históricos del INDEC. Implementa algoritmos de optimización numérica con SciPy y genera gráficos interactivos con Matplotlib y NumPy. Presentado como trabajo práctico en Matemática III.",
     github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-N-1-Matematica-III-UNSAM",
     image: "/projects/expectativa inflacionaria.webp",
     tags: [TAGS.PYTHON],
   },
   {
-    title: "Prediccion de Cambio Climático en Argentina",
-    description: "Análisis de variables meteorológicas de Buenos Aires (1991-2023) con modelos predictivos. Identifica tendencias climáticas y genera predicciones. Interfaz interactiva con Python, Pandas, NumPy, Matplotlib y Scikit-Learn.",
+    title: "Predicción de Cambio Climático en Buenos Aires",
+    description: "Análisis de 30 años de datos meteorológicos de Buenos Aires (1991–2023) con modelos de regresión y predicción. Identifica tendencias de temperatura, precipitaciones y humedad. Usa Pandas para el procesamiento, Scikit-Learn para los modelos predictivos y Matplotlib para visualización interactiva.",
     github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-N-2-Matematica-III-UNSAM",
     image: "/projects/cambio climatico.webp",
     tags: [TAGS.PYTHON],
   },
   {
-    title: "Canales en Go - Trabajo Practico sobre Go Routines y Canales",
-    description: "Implementación de algoritmos clásicos utilizando Go Routines y Canales. Ejemplos incluyen Productor-Consumidor y buffer sobre los canales. Proyecto académico para entender concurrencia y comunicación en Go.",
+    title: "Canales en Go — Concurrencia con Goroutines",
+    description: "Implementación de patrones clásicos de concurrencia en Go: Productor-Consumidor, pipelines con buffers y sincronización entre goroutines mediante canales. El proyecto explora los trade-offs entre canales con y sin buffer, y cómo evitar deadlocks. Trabajo práctico del Seminario de Programación en UNSAM.",
     github: "https://github.com/LucasGonzaloR03/Trabajo-Practico-de-Canales-Seminario-de-Programacion-UNSAM",
     image: "/projects/canales.webp",
     tags: [TAGS.GO],
   },
   {
-    title: "Image Tool - Procesamiento de imágenes",
-    description: "Herramienta web para subir, mejorar y eliminar el fondo de imágenes. Arquitectura de microservicios con Node.js y Python, frontend moderno y despliegue con Docker.",
+    title: "Image Tool — Procesamiento de imágenes con microservicios",
+    description: "Aplicación web para subir, mejorar y eliminar el fondo de imágenes. Arquitectura de microservicios: un servicio Node.js maneja las peticiones del frontend en React, mientras un microservicio Python procesa las imágenes con remoción de fondo automática. Todo orquestado con Docker Compose.",
     github: "https://github.com/LucasGonzaloR03/image-tool",
     image: "/projects/image-tool.webp",
     tags: [TAGS.NODE, TAGS.PYTHON, TAGS.REACT, TAGS.DOCKER],
@@ -154,11 +155,14 @@ const PROJECTS = [
         <div class="w-full md:w-1/2">
           <div class="relative h-full flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
             
-            <img
-              alt="imagen-proyecto"
+            <Image
+              src={image}
+              alt={`Captura de pantalla: ${title}`}
+              width={600}
+              height={400}
+              inferSize
               class="object-cover object-top w-full h-full transition duration-500 md:scale-110 md:group-hover:scale-105"
               loading="lazy"
-              src={image}
             />
 
           </div>
@@ -191,7 +195,7 @@ const PROJECTS = [
               {github && (
                 <LinkButton href={github}>
                   <GitHub class="size-6" />
-                  Codigo
+                  Código
                 </LinkButton>
               )}
             </footer>
@@ -201,6 +205,3 @@ const PROJECTS = [
     ))
   }
 </div>
-
-
-
