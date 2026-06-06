@@ -1,5 +1,6 @@
 ---
 import GitHub from "./icons/GitHub.astro"
+import Globe from "./icons/Globe.astro"
 import NextJS from "./icons/NextJS.astro"
 import Tailwind from "./icons/Tailwind.astro"
 import Kotlin from "./icons/Kotlin.astro"
@@ -99,14 +100,15 @@ const PROJECTS = [
   {
     title: "Uberto Backend — Plataforma de reservas de viajes",
     description: "API REST en Kotlin/Spring Boot que gestiona usuarios, choferes y viajes en tiempo real. Combina cuatro bases de datos: PostgreSQL para datos transaccionales, MongoDB para perfiles de usuario, Redis para cachear rutas frecuentes y Neo4j para recomendaciones basadas en grafos. Incluye autenticación con Spring Security y arquitectura modular por capas.",
-    github: "https://github.com/LucasGonzaloR03/Uberto-Backend-PHM-UNSAM",
+    github: "https://github.com/LucasGonzaloR03/Uberto-Backend-Deploy",
     image: "/projects/uberto-backend.webp",
     tags: [TAGS.KOTLIN, TAGS.POSTGRESQL, TAGS.MONGODB, TAGS.REDIS, TAGS.NEO4J],
   },
   {
     title: "Uberto Frontend — Interfaz web para gestión de viajes",
     description: "SPA en React + TypeScript que consume la API REST de Uberto. Permite administrar usuarios, choferes y viajes con una interfaz responsiva construida con Material UI. Implementa manejo de estado, llamadas asíncronas a la API, testing de componentes y separación clara entre lógica y presentación.",
-    github: "https://github.com/LucasGonzaloR03/Uberto-Frontend-PHM-UNSAM",
+    github: "https://github.com/LucasGonzaloR03/Uberto-Frontend-Deploy",
+    live: "https://uberto-frontend-deploy.vercel.app/",
     image: "/projects/uberto-frontend.webp",
     tags: [TAGS.REACT, TAGS.TYPESCRIPT, TAGS.MATERIALUI, TAGS.CSS],
   },
@@ -150,7 +152,7 @@ const PROJECTS = [
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, github }) => (
+    PROJECTS.map(({ image, title, description, tags, github, live }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="relative h-full flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
@@ -196,6 +198,12 @@ const PROJECTS = [
                 <LinkButton href={github}>
                   <GitHub class="size-6" />
                   Código
+                </LinkButton>
+              )}
+              {live && (
+                <LinkButton href={live}>
+                  <Globe class="size-6" />
+                  Ver en vivo
                 </LinkButton>
               )}
             </footer>
