@@ -1,5 +1,6 @@
 <button
   id="scrollToTop"
+  aria-label={Astro.props.lang === "en" ? "Back to top" : Astro.props.lang === "pt" ? "Voltar ao topo" : "Volver arriba"}
   class="fixed bottom-8 right-8 z-50 hidden items-center justify-center
          w-14 h-14 rounded-full
          bg-red-600 border-2 border-red-600

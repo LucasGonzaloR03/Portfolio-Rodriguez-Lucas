@@ -2,6 +2,8 @@
 interface Skill {
   name: string;
   icon: any;
+  logo?: string;
+  monochrome?: boolean;
 }
 
 const { title, skills = [] as Skill[] } = Astro.props as { title: string; skills?: Skill[];};
@@ -13,7 +15,7 @@ const { title, skills = [] as Skill[] } = Astro.props as { title: string; skills
     {skills.map((skill) => (
       <div class="flex flex-col items-center text-center">
         <div class="mb-2">
-          <skill.icon class="size-10"/>
+          <skill.icon class="size-10" logo={skill.logo} monochrome={skill.monochrome}/>
         </div>
         <span class="text-sm">{skill.name}</span>
       </div>

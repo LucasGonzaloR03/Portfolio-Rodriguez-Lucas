@@ -26,6 +26,7 @@ import Arduino from './icons/Arduino.astro';
 import Postman from './icons/Postman.astro';
 import SpringBoot from './icons/SpringBoot.astro';
 import Nodejs from './icons/Nodejs.astro';
+import AIIcon from './icons/AI.astro';
 
 const frontendSkills = [
     {
@@ -138,9 +139,23 @@ const otherSkills = [
         icon: Postman
     }
 ]
----
 
+const aiSkills = [
+    { name: 'ChatGPT', logo: 'openai' },
+    { name: 'Codex', logo: 'openai' },
+    { name: 'GitHub Copilot', logo: 'https://cdn.simpleicons.org/githubcopilot', monochrome: true },
+    { name: 'OpenCode', logo: 'https://cdn.simpleicons.org/opencode', monochrome: true },
+    { name: 'Antigravity', logo: 'https://antigravity.google/assets/image/brand/antigravity-icon__full-color.svg' },
+    { name: 'Claude', logo: 'https://cdn.simpleicons.org/claude' },
+    { name: 'Microsoft Copilot', logo: 'https://res.cdn.office.net/officehub/images/content/images/unauth-copilotcom/copilot-mobile-logo-static-286643fc8c.png' },
+    { name: 'Gemini', logo: 'https://cdn.simpleicons.org/googlegemini' },
+    { name: 'DeepSeek', logo: 'https://cdn.simpleicons.org/deepseek' },
+    { name: 'Cursor', logo: 'https://cdn.simpleicons.org/cursor', monochrome: true }
+].map(({ name, logo, monochrome = false }) => ({ name, logo, monochrome, icon: AIIcon }));
+const { lang = "es" } = Astro.props
+---
 <SkillsContainer title="Frontend" skills={frontendSkills} /> 
 <SkillsContainer title="Backend" skills={backendSkills} />
-<SkillsContainer title="Bases de Datos" skills={databaseSkills} />
-<SkillsContainer title="Otras Habilidades" skills={otherSkills} />
+<SkillsContainer title={lang === "en" ? "Databases" : lang === "pt" ? "Bancos de dados" : "Bases de Datos"} skills={databaseSkills} />
+<SkillsContainer title={lang === "en" ? "AI Tools" : lang === "pt" ? "Ferramentas de IA" : "Herramientas de IA"} skills={aiSkills} />
+<SkillsContainer title={lang === "en" ? "Other Skills" : lang === "pt" ? "Outras habilidades" : "Otras Habilidades"} skills={otherSkills} />

@@ -1,5 +1,8 @@
 ---
 const currentYear = new Date().getFullYear()
+const { lang = "es" } = Astro.props
+const en = lang === "en"
+const pt = lang === "pt"
 ---
 
 <footer
@@ -16,11 +19,11 @@ const currentYear = new Date().getFullYear()
       class="flex flex-wrap items-center mt-3 text-sm font-medium dark:text-white/90 sm:mt-0"
     >
       <li>
-        <a href="/#sobre-mi" class="hover:underline me-4 md:me-6">Sobre mí</a>
+        <a href={`${en ? "/en" : pt ? "/pt" : ""}/#sobre-mi`} class="hover:underline me-4 md:me-6">{en ? "About" : pt ? "Sobre mim" : "Sobre mí"}</a>
       </li>
       <li>
-        <a id="contacto" href="/#contacto" class="hover:underline"
-          >Contacto</a
+        <a id="contacto" href={`${en ? "/en" : pt ? "/pt" : ""}/#contacto`} class="hover:underline"
+          >{en ? "Contact" : pt ? "Contato" : "Contacto"}</a
         >
       </li>
     </ul>

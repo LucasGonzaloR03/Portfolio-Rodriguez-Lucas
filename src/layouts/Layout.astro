@@ -13,20 +13,43 @@ injectSpeedInsights()
 interface Props {
   title: string
   description: string
+  lang?: "es" | "en" | "pt"
 }
 
-const { description, title } = Astro.props
+const { description, title, lang = "es" } = Astro.props
+const siteUrl = "https://porfolio-rodriguez-lucas.dev"
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang === "pt" ? "pt-BR" : lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" hreflang="es" href={`${siteUrl}/`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en`} />
+    <link rel="alternate" hreflang="pt-BR" href={`${siteUrl}/pt`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      try {
+        const savedLanguage = localStorage.getItem("preferred-language")
+        const browserLanguages = navigator.languages?.length ? navigator.languages : [navigator.language]
+        const detectedLanguage = browserLanguages
+          .map((language) => language.toLowerCase().split("-")[0])
+          .find((language) => ["es", "en", "pt"].includes(language))
+        const targetLanguage = savedLanguage || detectedLanguage || "es"
+
+        if (window.location.pathname === "/" && targetLanguage !== "es") {
+          const destination = targetLanguage === "pt" ? "/pt" : "/en"
+          window.location.replace(`${destination}${window.location.search}${window.location.hash}`)
+        }
+      } catch {
+        // Keep the Spanish homepage if browser preferences are unavailable.
+      }
+    </script>
     <ClientRouter />
     <Analytics />
   </head>
@@ -38,9 +61,9 @@ const { description, title } = Astro.props
       dark:[background:radial-gradient(125%_125%_at_50%_10%,#000000_40%,#5c5c5c_100%)]"
     >
     </div>
-    <Header />
+    <Header lang={lang} />
     <slot />
-    <Footer />
+    <Footer lang={lang} />
     
     <style is:global>
       :root {
@@ -118,6 +141,6 @@ const { description, title } = Astro.props
         }
       }
     </style>
-    <ScroolToTop />
+    <ScroolToTop lang={lang} />
   </body>
 </html>

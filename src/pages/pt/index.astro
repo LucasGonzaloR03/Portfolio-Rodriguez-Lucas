@@ -1,0 +1,62 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import AboutMe from "@/components/AboutMe.astro"
+import CodeIcon from "@/components/icons/Code.astro"
+import ProfileCheck from "@/components/icons/ProfileCheck.astro"
+import Projects from "@/components/Projects.astro"
+import SectionContainer from "@/components/SectionContainer.astro"
+import Hero from "@/components/Hero.astro"
+import TitleSection from "@/components/TitleSection.astro"
+import Skills from "@/components/Skills.astro"
+import Brain from "@/components/icons/Brain.astro"
+import Contact from "@/components/Contact.astro"
+import Mail from "@/components/icons/Mail.astro"
+import Experience from "@/components/Experience.astro"
+import Briefcase from "@/components/icons/Briefcase.astro"
+import Languages from "@/components/Languages.astro"
+import Globe from "@/components/icons/Globe.astro"
+---
+
+<Layout
+  lang="pt"
+  title="Lucas Rodriguez | Portfólio de Desenvolvedor Full-Stack"
+  description="Portfólio de Lucas Gonzalo Rodriguez, formado pela UNSAM e desenvolvedor full-stack em Buenos Aires, Argentina. Auxiliar de ensino em desenvolvimento web e bancos de dados, em busca da primeira oportunidade profissional."
+>
+  <main class="px-4">
+    <SectionContainer class="py-16 md:py-36" id="inicio">
+      <Hero lang="pt" />
+    </SectionContainer>
+
+    <div class="space-y-24">
+      <SectionContainer id="experiencia">
+        <TitleSection><Briefcase class="size-7" />Experiência</TitleSection>
+        <Experience lang="pt" />
+      </SectionContainer>
+
+      <SectionContainer id="habilidades">
+        <TitleSection><Brain class="size-7" />Habilidades</TitleSection>
+        <Skills lang="pt" />
+      </SectionContainer>
+
+      <SectionContainer id="idiomas">
+        <TitleSection><Globe class="size-7" />Idiomas</TitleSection>
+        <Languages lang="pt" />
+      </SectionContainer>
+
+      <SectionContainer id="proyectos">
+        <TitleSection><CodeIcon class="size-7" />Projetos</TitleSection>
+        <Projects lang="pt" />
+      </SectionContainer>
+
+      <SectionContainer id="sobre-mi">
+        <TitleSection><ProfileCheck class="size-7" />Sobre mim</TitleSection>
+        <AboutMe lang="pt" />
+      </SectionContainer>
+
+      <SectionContainer id="contacto">
+        <TitleSection><Mail class="size-7" />Contato</TitleSection>
+        <Contact lang="pt" />
+      </SectionContainer>
+    </div>
+  </main>
+</Layout>

@@ -1,15 +1,20 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro"
+import Flag from "./Flag.astro"
 
+const { lang = "es" } = Astro.props
+const isEnglish = lang === "en"
+const isPortuguese = lang === "pt"
+const languageName = isEnglish ? "Language" : isPortuguese ? "Idioma" : "Idioma"
 const navItems = [
-  { title: "Inicio", label: "inicio", url: "/#inicio" },
-  { title: "Experiencia", label: "experiencia", url: "/#experiencia" },
-  { title: "Habilidades", label: "habilidades", url: "/#habilidades" },
-  { title: "Idiomas", label: "idiomas", url: "/#idiomas" },
-  { title: "Proyectos", label: "proyectos", url: "/#proyectos" },
-  { title: "Sobre mí", label: "sobre-mi", url: "/#sobre-mi" },
-  { title: "Contacto", label: "contacto", url: "/#contacto" },
-]
+  { title: "Inicio", label: "inicio" },
+  { title: "Experiencia", label: "experiencia" },
+  { title: "Habilidades", label: "habilidades" },
+  { title: "Idiomas", label: "idiomas" },
+  { title: "Proyectos", label: "proyectos" },
+  { title: "Sobre mí", label: "sobre-mi" },
+  { title: "Contacto", label: "contacto" },
+].map(({ title, label }) => ({ title: isEnglish ? ({ inicio: "Home", experiencia: "Experience", habilidades: "Skills", idiomas: "Languages", proyectos: "Projects", "sobre-mi": "About", contacto: "Contact" }[label] ?? title) : isPortuguese ? ({ inicio: "Início", experiencia: "Experiência", habilidades: "Habilidades", idiomas: "Idiomas", proyectos: "Projetos", "sobre-mi": "Sobre mim", contacto: "Contato" }[label] ?? title) : title, label, url: `${isEnglish ? "/en" : isPortuguese ? "/pt" : ""}/#${label}` }))
 ---
 
 <header class="fixed top-0 z-10 w-full mt-2 px-4 flex items-center justify-center">
@@ -19,23 +24,44 @@ const navItems = [
     id="desktop-nav"
     class="hidden md:flex px-3 text-base font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
   >
+    <div class="flex items-center gap-1 px-2 text-sm" aria-label={languageName}>
+      <a href={`/${Astro.url.hash}`} data-language-switch="es" aria-label="Español" title="Español" lang="es" aria-current={!isEnglish && !isPortuguese ? "page" : undefined} class:list={["inline-flex items-center rounded-sm px-1 py-1 leading-none transition hover:scale-110 hover:text-red-500", { "ring-1 ring-red-500": !isEnglish && !isPortuguese }]}><Flag country="argentina" class="h-4 w-6 rounded-sm shadow-sm" /></a>
+      <span aria-hidden="true">|</span>
+      <a href={`/en${Astro.url.hash}`} data-language-switch="en" aria-label="English" title="English" lang="en" aria-current={isEnglish ? "page" : undefined} class:list={["inline-flex items-center rounded-sm px-1 py-1 leading-none transition hover:scale-110 hover:text-red-500", { "ring-1 ring-red-500": isEnglish }]}><Flag country="united-kingdom" class="h-4 w-6 rounded-sm shadow-sm" /></a>
+      <span aria-hidden="true">|</span>
+      <a href={`/pt${Astro.url.hash}`} data-language-switch="pt" aria-label="Português (Brasil)" title="Português (Brasil)" lang="pt-BR" aria-current={isPortuguese ? "page" : undefined} class:list={["inline-flex items-center rounded-sm px-1 py-1 leading-none transition hover:scale-110 hover:text-red-500", { "ring-1 ring-red-500": isPortuguese }]}><Flag country="brazil" class="h-4 w-6 rounded-sm shadow-sm" /></a>
+    </div>
     {navItems.map((link) => (
       <a
         class="relative block px-2 py-2 transition hover:text-red-500 dark:hover:text-red-500"
-        aria-label={link.label}
+        aria-label={link.title}
+        data-section-link={link.label}
         href={link.url}
       >
         {link.title}
       </a>
     ))}
     <!-- UNA SOLA instancia de ThemeToggle, solo aquí -->
-    <ThemeToggle />
+    <ThemeToggle lang={lang} />
   </nav>
 
   <!-- ===================== MOBILE BAR ===================== -->
   <div class="flex md:hidden w-full items-center justify-between px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/90 backdrop-blur shadow-md ring-1 ring-black/10 dark:ring-white/10">
-    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Portfolio Lucas Rodriguez</span>
+    <span class="whitespace-nowrap text-sm font-semibold text-gray-700 dark:text-gray-200">Lucas Rodriguez</span>
     <div class="flex items-center gap-2">
+      <details class="relative shrink-0">
+        <summary aria-label={languageName} title={languageName} class="flex h-9 w-14 cursor-pointer list-none items-center justify-center rounded-full border border-gray-300 bg-white/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:border-gray-600 dark:bg-gray-800 [&::-webkit-details-marker]:hidden">
+          <Flag country={isEnglish ? "united-kingdom" : isPortuguese ? "brazil" : "argentina"} class="h-4 w-6 rounded-sm shadow-sm" />
+          <svg aria-hidden="true" class="ml-1 size-3 shrink-0 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.22 7.22a.75.75 0 0 1 1.06 0L10 10.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 8.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <nav aria-label={languageName} class="absolute right-0 top-10 z-20 flex gap-1 rounded-xl border border-gray-200 bg-white/95 p-2 shadow-lg backdrop-blur dark:border-gray-700 dark:bg-gray-900/95">
+          <a href="/" data-language-switch="es" aria-label="Español" lang="es" aria-current={!isEnglish && !isPortuguese ? "page" : undefined} class:list={["rounded-sm p-2 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:hover:bg-gray-800", { "ring-1 ring-red-500": !isEnglish && !isPortuguese }]}><Flag country="argentina" class="h-4 w-6 rounded-sm shadow-sm" /></a>
+          <a href="/en" data-language-switch="en" aria-label="English" lang="en" aria-current={isEnglish ? "page" : undefined} class:list={["rounded-sm p-2 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:hover:bg-gray-800", { "ring-1 ring-red-500": isEnglish }]}><Flag country="united-kingdom" class="h-4 w-6 rounded-sm shadow-sm" /></a>
+          <a href="/pt" data-language-switch="pt" aria-label="Português (Brasil)" lang="pt-BR" aria-current={isPortuguese ? "page" : undefined} class:list={["rounded-sm p-2 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:hover:bg-gray-800", { "ring-1 ring-red-500": isPortuguese }]}><Flag country="brazil" class="h-4 w-6 rounded-sm shadow-sm" /></a>
+        </nav>
+      </details>
 
       <!--
         Botón de tema MOBILE: completamente independiente del ThemeToggle.
@@ -44,9 +70,9 @@ const navItems = [
       -->
       <button
         id="mobile-cycle-theme"
-        aria-label="Cambiar tema"
+        aria-label={isEnglish ? "Change theme" : isPortuguese ? "Mudar tema" : "Cambiar tema"}
         class="appearance-none border-none p-1 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:scale-125 transition"
-      >
+    >
         <svg id="mcycle-sun" xmlns="http://www.w3.org/2000/svg" class="size-5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -63,7 +89,7 @@ const navItems = [
       <!-- Hamburger -->
       <button
         id="menu-toggle"
-        aria-label="Abrir menú"
+        aria-label={isEnglish ? "Open menu" : isPortuguese ? "Abrir menu" : "Abrir menú"}
         class="p-1 rounded-lg text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition"
       >
         <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -84,7 +110,8 @@ const navItems = [
     {navItems.map((link) => (
       <a
         class="mobile-nav-link block px-6 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"
-        aria-label={link.label}
+        aria-label={link.title}
+        data-section-link={link.label}
         href={link.url}
       >
         {link.title}
@@ -140,6 +167,32 @@ const navItems = [
 </script>
 
 <script>
+  const navigateToLanguage = (targetLanguage: string) => {
+    try {
+      window.localStorage.setItem("preferred-language", targetLanguage)
+    } catch {
+      // Language navigation still works when browser storage is unavailable.
+    }
+    const currentPath = window.location.pathname
+    const visibleSection = Array.from(document.querySelectorAll<HTMLElement>("[data-section]"))
+      .map((element) => ({ id: element.id, top: element.getBoundingClientRect().top, bottom: element.getBoundingClientRect().bottom }))
+      .find(({ top, bottom }) => top <= 120 && bottom > 120)
+    const section = window.location.hash || (visibleSection ? `#${visibleSection.id}` : "")
+    const basePath = currentPath.replace(/^\/(en|pt)(?=\/|$)/, "") || "/"
+    const prefix = targetLanguage === "en" ? "/en" : targetLanguage === "pt" ? "/pt" : ""
+    const path = `${prefix}${basePath === "/" ? "" : basePath}` || "/"
+    window.location.href = `${path}${section}`
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element
+    const link = target.closest<HTMLAnchorElement>("[data-language-switch]")
+    if (link) {
+      event.preventDefault()
+      navigateToLanguage(link.dataset.languageSwitch ?? "es")
+    }
+  })
+
   // ── Hamburger ───────────────────────────────────────────────────────────────
   document.addEventListener("astro:page-load", () => {
     const toggle = document.getElementById("menu-toggle")
@@ -178,7 +231,7 @@ const navItems = [
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           allNavLinks.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
+            if (item.getAttribute("data-section-link") == entry.target.id) {
               item.classList.add("text-red-500")
             } else {
               item.classList.remove("text-red-500")

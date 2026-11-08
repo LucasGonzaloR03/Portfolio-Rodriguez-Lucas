@@ -1,27 +1,38 @@
 ---
 import { Image } from "astro:assets"
+const { lang = "es" } = Astro.props
+const en = lang === "en"
+const pt = lang === "pt"
 ---
 
 <article class="flex flex-col items-center justify-center gap-8 text-gray-700 dark:text-gray-300 md:flex-row">
   <div
     class="[&>p]:mb-4 [&>p>strong]:text-yellow-600 dark:[&>p>strong]:text-yellow-400 [&>p>strong]:font-normal [&>p>strong]:font-mono text-pretty order-2 md:order-1"
   >
+    {en ? <>
+      <p>I’m a full-stack developer with a strong academic background and hands-on teaching experience in the technologies I use. As a <strong>teaching assistant at UNSAM</strong>, I help students with backend architecture, databases, and frontend development. Teaching has pushed me to understand these concepts deeply, not just apply them.</p>
+      <p>I’m especially interested in <strong>system design</strong>: choosing when a relational database fits better than a document database, structuring APIs with scalability in mind, and understanding when services benefit from event-driven communication. I adapt quickly to new technologies and value both clean code and a thorough understanding of the problem.</p>
+      <p>I work with <strong>Kotlin, Spring Boot, React, TypeScript, PostgreSQL, MongoDB, Redis, Neo4j, Docker, and Go</strong>. I graduated from UNSAM in 2025 and am looking for my first professional role on a team where I can contribute and continue growing.</p>
+    </> : pt ? <>
+      <p>Sou desenvolvedor full-stack com sólida formação acadêmica e experiência prática ensinando as tecnologias que utilizo. Como <strong>auxiliar de ensino na UNSAM</strong>, acompanho estudantes em arquitetura backend, bancos de dados e desenvolvimento frontend. Ensinar me ajudou a aprofundar esses conceitos, em vez de apenas aplicá-los.</p>
+      <p>Tenho especial interesse em <strong>design de sistemas</strong>: avaliar quando um banco relacional é mais adequado que um banco documental, estruturar APIs pensando em escalabilidade e entender quando serviços se beneficiam de uma comunicação orientada a eventos. Aprendo novas tecnologias com rapidez e valorizo tanto a qualidade do código quanto a compreensão profunda dos problemas.</p>
+      <p>Trabalho com <strong>Kotlin, Spring Boot, React, TypeScript, PostgreSQL, MongoDB, Redis, Neo4j, Docker e Go</strong>. Formado pela UNSAM em 2025, busco minha primeira experiência profissional em uma equipe onde eu possa contribuir e continuar crescendo.</p>
+    </> : <>
     <p>
       Soy desarrollador full-stack con formación académica sólida y experiencia concreta enseñando las mismas tecnologías que utilizo. Como <strong>Ayudante de Cátedra en la UNSAM</strong>, acompaño a estudiantes en arquitecturas backend, bases de datos y desarrollo frontend, lo que me exigió consolidar los conceptos en profundidad y no solo aplicarlos.
     </p>
-
     <p>
       Me interesa especialmente el <strong>diseño de sistemas</strong>: evaluar cuándo una base relacional es más adecuada que una documental, cómo estructurar una API pensando en su escalabilidad, o por qué ciertos servicios se benefician de una comunicación orientada a eventos. Me adapto con rapidez a nuevas tecnologías y priorizo tanto la calidad del código como la comprensión profunda de los problemas.
     </p>
-
     <p>
       Tecnologías con las que trabajo: <strong>Kotlin, Spring Boot, React, TypeScript, PostgreSQL, MongoDB, Redis, Neo4j, Docker y Go</strong>. Egresado de la UNSAM en 2025, en búsqueda de mi primera experiencia profesional en un equipo donde pueda contribuir y seguir creciendo.
     </p>
+    </>}
   </div>
 
   <Image
     src="/lucas-rodriguez-imagen.webp"
-    alt="Lucas Gonzalo Rodríguez"
+    alt={en ? "Lucas Gonzalo Rodríguez" : "Lucas Gonzalo Rodríguez"}
     width={256}
     height={256}
     loading="eager"

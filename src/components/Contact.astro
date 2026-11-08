@@ -1,36 +1,41 @@
+---
+const { lang = "es" } = Astro.props
+const en = lang === "en"
+const pt = lang === "pt"
+---
 <article class="w-full">
   <div class="flex flex-col gap-6">
     <form id="contact-form" class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <label for="email" class="text-sm font-semibold">Email</label>
+        <label for="email" class="text-sm font-semibold">{pt ? "E-mail" : "Email"}</label>
         <input
           type="email"
           id="email"
           name="email"
-          placeholder="tu@email.com"
+          placeholder={en ? "you@example.com" : pt ? "voce@exemplo.com" : "tu@email.com"}
           required
           class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="subject" class="text-sm font-semibold">Asunto</label>
+        <label for="subject" class="text-sm font-semibold">{en ? "Subject" : pt ? "Assunto" : "Asunto"}</label>
         <input
           type="text"
           id="subject"
           name="subject"
-          placeholder="Asunto del mensaje"
+          placeholder={en ? "Message subject" : pt ? "Assunto da mensagem" : "Asunto del mensaje"}
           required
           class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="message" class="text-sm font-semibold">Mensaje</label>
+        <label for="message" class="text-sm font-semibold">{en ? "Message" : pt ? "Mensagem" : "Mensaje"}</label>
         <textarea
           id="message"
           name="message"
-          placeholder="Tu mensaje aquí..."
+          placeholder={en ? "Your message here..." : pt ? "Escreva sua mensagem..." : "Tu mensaje aquí..."}
           rows="6"
           required
           class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
@@ -42,7 +47,7 @@
         type="submit"
         class="px-6 py-2 rounded-lg bg-red-600 hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-500 text-white font-semibold transition-colors duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Enviar
+        {en ? "Send" : pt ? "Enviar mensagem" : "Enviar"}
       </button>
     </form>
   </div>
@@ -85,7 +90,9 @@
     e.preventDefault();
 
     const originalBtnText = submitBtn.innerText;
-    submitBtn.innerText = "Mensaje enviándose...";
+    const en = document.documentElement.lang === "en";
+    const pt = document.documentElement.lang.startsWith("pt");
+    submitBtn.innerText = en ? "Sending message..." : pt ? "Enviando mensagem..." : "Mensaje enviándose...";
     submitBtn.disabled = true;
 
     const email = (document.getElementById("email") as HTMLInputElement).value;
@@ -106,14 +113,14 @@
       });
 
       if (response.ok) {
-        showSnackbar("¡Email enviado con éxito!", true);
+        showSnackbar(en ? "Email sent successfully!" : pt ? "E-mail enviado com sucesso!" : "¡Email enviado con éxito!", true);
         form.reset();
       } else {
         const error = await response.json();
-        showSnackbar(error.message || "Error al enviar el email", false);
+        showSnackbar(en ? "Failed to send email" : pt ? "Não foi possível enviar o e-mail" : (error.message || "Error al enviar el email"), false);
       }
     } catch (error) {
-      showSnackbar("Error al enviar el email", false);
+      showSnackbar(en ? "Failed to send email" : pt ? "Não foi possível enviar o e-mail" : "Error al enviar el email", false);
       console.error("Error:", error);
     } finally {
       submitBtn.innerText = originalBtnText;

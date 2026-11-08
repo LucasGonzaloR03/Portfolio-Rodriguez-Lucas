@@ -1,0 +1,36 @@
+---
+interface Props {
+  country: "argentina" | "united-kingdom" | "brazil"
+  class?: string
+}
+
+const { country, class: className = "h-4 w-6" } = Astro.props
+---
+
+{country === "argentina" && (
+  <svg aria-hidden="true" class={className} viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="16" rx="2" fill="#fff" />
+    <path d="M2 0h20a2 2 0 0 1 2 2v3.333H0V2a2 2 0 0 1 2-2ZM0 10.667h24V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-3.333Z" fill="#74ACDF" />
+    <circle cx="12" cy="8" r="1.65" fill="#F6B40E" />
+    <path d="M12 5.7v.55m0 3.5v.55m-2.3-2.3h.55m3.5 0h.55m-3.926-1.926.389.389m2.464 2.464.389.389m0-3.242-.389.389m-2.464 2.464-.389.389" stroke="#85340A" stroke-width=".4" />
+  </svg>
+)}
+
+{country === "united-kingdom" && (
+  <svg aria-hidden="true" class={className} viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+    <rect width="60" height="30" rx="2" fill="#012169" />
+    <path d="M0 0h7l53 26.5V30h-7L0 3.5V0Zm60 0h-7L0 26.5V30h7L60 3.5V0Z" fill="#fff" />
+    <path d="m0 0 60 30M60 0 0 30" stroke="#C8102E" stroke-width="2.2" />
+    <path d="M0 11h60v8H0zM26 0h8v30h-8z" fill="#fff" />
+    <path d="M0 13h60v4H0zM28 0h4v30h-4z" fill="#C8102E" />
+  </svg>
+)}
+
+{country === "brazil" && (
+  <svg aria-hidden="true" class={className} viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="16" rx="2" fill="#009739" />
+    <path d="m12 2 9 6-9 6-9-6 9-6Z" fill="#FEDD00" />
+    <circle cx="12" cy="8" r="3.2" fill="#012169" />
+    <path d="M9.12 7.05a5.4 5.4 0 0 1 5.56 1.18" fill="none" stroke="#fff" stroke-width=".55" />
+  </svg>
+)}

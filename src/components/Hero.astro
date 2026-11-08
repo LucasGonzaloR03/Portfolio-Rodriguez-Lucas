@@ -6,6 +6,9 @@ import MailIcon from "@/components/icons/Mail.astro"
 import SocialPill from "@/components/SocialPill.astro"
 import GitHubIcon from "./icons/GitHub.astro"
 import CurriculumIcon from "./icons/Curriculum.astro"
+const { lang = "es" } = Astro.props
+const en = lang === "en"
+const pt = lang === "pt"
 ---
 
 <div class="max-w-xl">
@@ -24,23 +27,23 @@ import CurriculumIcon from "./icons/Curriculum.astro"
       rel="noopener"
       class="flex items-center transition md:justify-center md:hover:scale-105"
     >
-      <Badge>Disponible para trabajar</Badge>
+      <Badge>{en ? "Open to opportunities" : pt ? "Aberto a oportunidades" : "Disponible para trabajar"}</Badge>
     </a>
   </div>
   <h1
     class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
   >
-    Hola, soy Lucas Rodriguez
+    {en ? "Hi, I'm Lucas Rodriguez" : pt ? "Olá, sou Lucas Rodriguez" : "Hola, soy Lucas Rodriguez"}
   </h1>
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
-    <strong>Desarrollador Full-Stack</strong> egresado de la UNSAM (Buenos Aires, Argentina) y <strong>Ayudante de Cátedra</strong> en materias de desarrollo web y bases de datos. Apasionado por construir software de calidad con Kotlin, Spring Boot, React y más. Busco mi primer puesto profesional para seguir creciendo.
+    {en ? <><strong>Full-stack developer</strong> and UNSAM graduate based in Buenos Aires, Argentina. I also work as a <strong>teaching assistant</strong> in web development and database courses. I enjoy building quality software with Kotlin, Spring Boot, React, and more. I’m looking for my first professional role and an opportunity to keep growing.</> : pt ? <><strong>Desenvolvedor full-stack</strong> formado pela UNSAM, em Buenos Aires, Argentina. Também atuo como <strong>auxiliar de ensino</strong> em disciplinas de desenvolvimento web e bancos de dados. Gosto de criar software de qualidade com Kotlin, Spring Boot, React e outras tecnologias. Busco minha primeira oportunidade profissional para continuar crescendo.</> : <><strong>Desarrollador Full-Stack</strong> egresado de la UNSAM (Buenos Aires, Argentina) y <strong>Ayudante de Cátedra</strong> en materias de desarrollo web y bases de datos. Apasionado por construir software de calidad con Kotlin, Spring Boot, React y más. Busco mi primer puesto profesional para seguir creciendo.</>}
   </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="#contacto" target="_self">
       <MailIcon class="size-4" />
-      Contáctame
+      {en ? "Contact me" : pt ? "Entre em contato" : "Contáctame"}
     </SocialPill>
     <SocialPill href="https://www.linkedin.com/in/lucasgonzalor03">
       <LinkedInIcon class="size-4" />
@@ -52,7 +55,7 @@ import CurriculumIcon from "./icons/Curriculum.astro"
     </SocialPill>
     <SocialPill href="https://drive.google.com/file/d/10ppUccGXdWUTiAkwqdVXns3cAwCmGLEh/view?usp=sharing">
       <CurriculumIcon className="size-4" />
-      Curriculum
+      {en ? "Resume" : pt ? "Currículo" : "Curriculum"}
     </SocialPill>
   </nav>
 </div>

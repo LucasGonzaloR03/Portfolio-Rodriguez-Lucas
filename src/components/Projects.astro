@@ -148,18 +148,38 @@ const PROJECTS = [
     tags: [TAGS.NODE, TAGS.PYTHON, TAGS.REACT, TAGS.DOCKER],
   },
 ]
+const englishCopy = [
+  ["Uberto Backend — Ride booking platform", "Kotlin/Spring Boot REST API for managing users, drivers, and rides in real time. It combines four databases: PostgreSQL for transactional data, MongoDB for user profiles, Redis to cache frequently used routes, and Neo4j for graph-based recommendations. Includes Spring Security authentication and a layered modular architecture."],
+  ["Uberto Frontend — Web interface for ride management", "React + TypeScript single-page app that consumes the Uberto REST API. It lets users manage riders, drivers, and trips through a responsive Material UI interface. Includes state management, asynchronous API calls, component testing, and a clear separation between logic and presentation."],
+  ["MusicAr — Music group management", "Kotlin application for modeling music groups, roles, instruments, and contracts. The focus was object-oriented design: inheritance, polymorphism, typed collections, and unit test coverage. This academic project helped shape my foundation in domain design."],
+  ["Inflation Expectations in Argentina (2017–2023)", "Python tool for calculating and visualizing inflation expectations using historical INDEC data. It implements numerical optimization algorithms with SciPy and creates interactive charts with Matplotlib and NumPy. Submitted as coursework for Mathematics III."],
+  ["Climate Change Forecasting in Buenos Aires", "Analysis of 30 years of weather data for Buenos Aires (1991–2023) using regression and forecasting models. The project identifies temperature, rainfall, and humidity trends, using Pandas for data processing, Scikit-Learn for predictive models, and Matplotlib for visualization."],
+  ["Go Channels — Concurrency with Goroutines", "Implementation of classic Go concurrency patterns: producer-consumer, buffered pipelines, and goroutine synchronization with channels. Explores the trade-offs of buffered and unbuffered channels and ways to avoid deadlocks. Coursework for UNSAM’s Programming Seminar."],
+  ["Image Tool — Image processing with microservices", "Web application for uploading, enhancing, and removing backgrounds from images. A Node.js service handles requests from a React frontend, while a Python microservice processes images and automatically removes backgrounds. Orchestrated with Docker Compose."],
+]
+const portugueseCopy = [
+  ["Uberto Backend — Plataforma de reserva de viagens", "API REST em Kotlin/Spring Boot para gerenciar usuários, motoristas e viagens em tempo real. Combina quatro bancos de dados: PostgreSQL para dados transacionais, MongoDB para perfis de usuário, Redis para armazenar rotas frequentes em cache e Neo4j para recomendações baseadas em grafos. Inclui autenticação com Spring Security e arquitetura modular em camadas."],
+  ["Uberto Frontend — Interface web para gestão de viagens", "Aplicação de página única em React + TypeScript que consome a API REST do Uberto. Permite gerenciar passageiros, motoristas e viagens por meio de uma interface responsiva feita com Material UI. Inclui gerenciamento de estado, chamadas assíncronas à API, testes de componentes e separação entre lógica e apresentação."],
+  ["MusicAr — Gestão de grupos musicais", "Aplicação em Kotlin para modelar grupos musicais, funções, instrumentos e contratos. O foco foi o design orientado a objetos: herança, polimorfismo, coleções tipadas e cobertura de testes unitários. Projeto acadêmico que contribuiu para minha formação em design de domínio."],
+  ["Expectativa de inflação na Argentina (2017–2023)", "Ferramenta em Python para calcular e visualizar expectativas de inflação usando dados históricos do INDEC. Implementa algoritmos de otimização numérica com SciPy e gera gráficos interativos com Matplotlib e NumPy. Trabalho apresentado na disciplina Matemática III."],
+  ["Previsão de mudanças climáticas em Buenos Aires", "Análise de 30 anos de dados meteorológicos de Buenos Aires (1991–2023) com modelos de regressão e previsão. Identifica tendências de temperatura, precipitação e umidade. Usa Pandas no processamento, Scikit-Learn nos modelos preditivos e Matplotlib na visualização."],
+  ["Canais em Go — Concorrência com Goroutines", "Implementação de padrões clássicos de concorrência em Go: produtor-consumidor, pipelines com buffers e sincronização de goroutines por canais. Explora as diferenças entre canais com e sem buffer e como evitar deadlocks. Trabalho prático do Seminário de Programação da UNSAM."],
+  ["Image Tool — Processamento de imagens com microsserviços", "Aplicação web para enviar, melhorar e remover o fundo de imagens. Um serviço Node.js recebe as solicitações do frontend em React, enquanto um microsserviço em Python processa as imagens e remove fundos automaticamente. Tudo é orquestrado com Docker Compose."],
+]
+const { lang = "es" } = Astro.props
 ---
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, github, live }) => (
+    PROJECTS.map(({ image, title, description, tags, github, live }, index) => (
+      (() => { const [displayTitle, displayDescription] = lang === "en" ? englishCopy[index] : lang === "pt" ? portugueseCopy[index] : [title, description]; return (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="relative h-full flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
             
             <Image
               src={image}
-              alt={`Captura de pantalla: ${title}`}
+              alt={lang === "en" ? `Screenshot: ${displayTitle}` : lang === "pt" ? `Imagem do projeto: ${displayTitle}` : `Captura de pantalla: ${displayTitle}`}
               width={600}
               height={400}
               inferSize
@@ -172,7 +192,7 @@ const PROJECTS = [
 
         <div class="w-full md:w-1/2 md:max-w-lg">
           <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-            {title}
+            {displayTitle}
           </h3>
 
           <div class="flex flex-wrap mt-2">
@@ -190,26 +210,27 @@ const PROJECTS = [
             </ul>
 
             <div class="mt-2 text-gray-700 dark:text-gray-200">
-              {description}
+              {displayDescription}
             </div>
 
             <footer class="flex items-end justify-start mt-4 gap-x-4">
               {github && (
                 <LinkButton href={github}>
                   <GitHub class="size-6" />
-                  Código
+                  {lang === "en" ? "Source code" : lang === "pt" ? "Código-fonte" : "Código"}
                 </LinkButton>
               )}
               {live && (
                 <LinkButton href={live}>
                   <Globe class="size-6" />
-                  Ver en vivo
+                  {lang === "en" ? "View live" : lang === "pt" ? "Ver online" : "Ver en vivo"}
                 </LinkButton>
               )}
             </footer>
           </div>
         </div>
       </article>
+      ) })()
     ))
   }
 </div>

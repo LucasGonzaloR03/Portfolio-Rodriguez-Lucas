@@ -26,40 +26,41 @@ const languages: Language[] = [
     certLabel: "EF SET Certificate",
   },
 ]
+const { lang = "es" } = Astro.props
 ---
 
 <div class="flex flex-col gap-6">
   {
-    languages.map((lang) => (
+    languages.map((language) => (
       <div class="flex flex-col gap-2">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <span class="text-base font-semibold text-gray-800 dark:text-gray-100">
-              {lang.name}
+              {lang === "en" ? (language.name === "Español" ? "Spanish" : "English") : lang === "pt" ? (language.name === "Español" ? "Espanhol" : "Inglês") : language.name}
             </span>
             <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300">
-              {lang.levelLabel}
+              {language.levelLabel}
             </span>
           </div>
-          <span class="text-sm text-gray-500 dark:text-gray-400">{lang.level}</span>
+          <span class="text-sm text-gray-500 dark:text-gray-400">{lang === "en" ? (language.level === "Nativo" ? "Native" : "Intermediate") : lang === "pt" ? (language.level === "Nativo" ? "Nativo" : "Intermediário") : language.level}</span>
         </div>
         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
           <div
             class="bg-red-500 dark:bg-red-600 h-2 rounded-full transition-all duration-500"
-            style={`width: ${lang.percent}%`}
+            style={`width: ${language.percent}%`}
           />
         </div>
-        {lang.note && (
+        {language.note && (
           <span class="text-xs text-gray-500 dark:text-gray-400 italic">
-            {lang.note}
-            {lang.certLink && (
+            {lang === "en" ? "Strong technical reading and listening · " : lang === "pt" ? "Boa leitura técnica e compreensão auditiva · " : language.note}
+            {language.certLink && (
               <a
-                href={lang.certLink}
+                href={language.certLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-yellow-600 dark:text-yellow-400 hover:underline not-italic font-medium"
               >
-                {lang.certLabel}
+                {language.certLabel}
               </a>
             )}
           </span>

@@ -28,11 +28,22 @@ const experiences: ExperienceItem[] = [
     ],
   },
 ]
+const { lang = "es" } = Astro.props
+const english: ExperienceItem[] = [
+  { title: "Teaching Assistant — Algorithms 3", company: "National University of San Martín (UNSAM)", period: "2025 — Present", description: ["Teaching support for a full-stack web development course covering frontend and backend.", "Guide students in React, TypeScript, Node.js, and REST API design.", "Review assignments and assess final projects."] },
+  { title: "Teaching Assistant — Programming with Modern Tools (PHM)", company: "National University of San Martín (UNSAM)", period: "2026 — Present", description: ["Teaching support for relational and non-relational databases (PostgreSQL, MongoDB, Redis).", "Support students with backend architecture and modern tools such as Spring Boot and Docker.", "Answer technical questions and guide students through their projects."] },
+]
+const items = lang === "en" ? english : experiences
+const portuguese: ExperienceItem[] = [
+  { title: "Auxiliar de Ensino — Algoritmos 3", company: "Universidade Nacional de San Martín (UNSAM)", period: "2025 — Presente", description: ["Apoio ao ensino em disciplina de desenvolvimento web full-stack, com conteúdo de frontend e backend.", "Oriento estudantes em React, TypeScript, Node.js e design de APIs REST.", "Corrijo trabalhos práticos e avalio projetos finais."] },
+  { title: "Auxiliar de Ensino — Programação com Ferramentas Modernas (PHM)", company: "Universidade Nacional de San Martín (UNSAM)", period: "2026 — Presente", description: ["Apoio ao ensino de bancos de dados relacionais e não relacionais (PostgreSQL, MongoDB, Redis).", "Dou suporte em arquitetura backend e ferramentas modernas, como Spring Boot e Docker.", "Respondo a dúvidas técnicas e acompanho os projetos dos estudantes."] },
+]
+const displayItems = lang === "pt" ? portuguese : items
 ---
 
 <div class="flex flex-col gap-y-12">
   {
-    experiences.map((exp) => (
+    displayItems.map((exp) => (
       <article class="flex flex-col md:flex-row gap-6 md:gap-10">
         <div class="md:w-1/3 flex flex-col gap-1">
           <span class="text-sm text-yellow-600 dark:text-yellow-400 font-mono font-semibold">
