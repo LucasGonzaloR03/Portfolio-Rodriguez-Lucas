@@ -17,6 +17,7 @@ import Go from "./icons/Go.astro"
 import LinkButton from "./LinkButton.astro"
 import Nodejs from "./icons/Nodejs.astro"
 import Docker from "./icons/Docker.astro"
+import DotNet from "./icons/DotNet.astro"
 import { Image } from "astro:assets"
 
 const TAGS = {
@@ -95,6 +96,11 @@ const TAGS = {
     class: "bg-[#2496ED] text-white",
     icon: Docker,
   },
+  DOTNET: {
+    name: "C# / .NET",
+    class: "bg-[#512BD4] text-white",
+    icon: DotNet,
+  },
 }
 const PROJECTS = [
   {
@@ -147,6 +153,14 @@ const PROJECTS = [
     image: "/projects/image-tool.webp",
     tags: [TAGS.NODE, TAGS.PYTHON, TAGS.REACT, TAGS.DOCKER],
   },
+  {
+    title: "Turnos API — Reserva de turnos con JWT y concurrencia",
+    description: "API REST en C#/.NET 8 para gestionar profesionales, servicios, horarios de atención y reserva de turnos. Implementa autenticación JWT con roles, validaciones y respuestas de error consistentes. El alta de turnos usa control de concurrencia para evitar dobles reservas. Incluye 21 tests unitarios, documentación con Swagger en producción y despliegue en Render con PostgreSQL en Neon.",
+    github: "https://github.com/LucasGonzaloR03/turnos-api-dotnet",
+    live: "https://turnos-api-dotnet.onrender.com/swagger/index.html",
+    image: "/projects/turnos-api.webp",
+    tags: [TAGS.DOTNET, TAGS.POSTGRESQL, TAGS.DOCKER],
+  },
 ]
 const englishCopy = [
   ["Uberto Backend — Ride booking platform", "Kotlin/Spring Boot REST API for managing users, drivers, and rides in real time. It combines four databases: PostgreSQL for transactional data, MongoDB for user profiles, Redis to cache frequently used routes, and Neo4j for graph-based recommendations. Includes Spring Security authentication and a layered modular architecture."],
@@ -156,6 +170,7 @@ const englishCopy = [
   ["Climate Change Forecasting in Buenos Aires", "Analysis of 30 years of weather data for Buenos Aires (1991–2023) using regression and forecasting models. The project identifies temperature, rainfall, and humidity trends, using Pandas for data processing, Scikit-Learn for predictive models, and Matplotlib for visualization."],
   ["Go Channels — Concurrency with Goroutines", "Implementation of classic Go concurrency patterns: producer-consumer, buffered pipelines, and goroutine synchronization with channels. Explores the trade-offs of buffered and unbuffered channels and ways to avoid deadlocks. Coursework for UNSAM’s Programming Seminar."],
   ["Image Tool — Image processing with microservices", "Web application for uploading, enhancing, and removing backgrounds from images. A Node.js service handles requests from a React frontend, while a Python microservice processes images and automatically removes backgrounds. Orchestrated with Docker Compose."],
+  ["Turnos API — Booking with JWT and concurrency control", "REST API in C#/.NET 8 for managing professionals, services, opening hours, and appointment booking. It implements JWT authentication with roles, validation, and consistent error responses. Bookings use concurrency control to prevent double reservations. Includes 21 unit tests, Swagger docs in production, and a Render deployment backed by PostgreSQL on Neon."],
 ]
 const portugueseCopy = [
   ["Uberto Backend — Plataforma de reserva de viagens", "API REST em Kotlin/Spring Boot para gerenciar usuários, motoristas e viagens em tempo real. Combina quatro bancos de dados: PostgreSQL para dados transacionais, MongoDB para perfis de usuário, Redis para armazenar rotas frequentes em cache e Neo4j para recomendações baseadas em grafos. Inclui autenticação com Spring Security e arquitetura modular em camadas."],
@@ -165,6 +180,7 @@ const portugueseCopy = [
   ["Previsão de mudanças climáticas em Buenos Aires", "Análise de 30 anos de dados meteorológicos de Buenos Aires (1991–2023) com modelos de regressão e previsão. Identifica tendências de temperatura, precipitação e umidade. Usa Pandas no processamento, Scikit-Learn nos modelos preditivos e Matplotlib na visualização."],
   ["Canais em Go — Concorrência com Goroutines", "Implementação de padrões clássicos de concorrência em Go: produtor-consumidor, pipelines com buffers e sincronização de goroutines por canais. Explora as diferenças entre canais com e sem buffer e como evitar deadlocks. Trabalho prático do Seminário de Programação da UNSAM."],
   ["Image Tool — Processamento de imagens com microsserviços", "Aplicação web para enviar, melhorar e remover o fundo de imagens. Um serviço Node.js recebe as solicitações do frontend em React, enquanto um microsserviço em Python processa as imagens e remove fundos automaticamente. Tudo é orquestrado com Docker Compose."],
+  ["Turnos API — Agendamento com JWT e controle de concorrência", "API REST em C#/.NET 8 para gerenciar profissionais, serviços, horários de atendimento e agendamento. Implementa autenticação JWT com papéis, validações e respostas de erro consistentes. O agendamento usa controle de concorrência para evitar reservas duplicadas. Inclui 21 testes unitários, documentação Swagger em produção e deploy na Render com PostgreSQL na Neon."],
 ]
 const { lang = "es" } = Astro.props
 ---
