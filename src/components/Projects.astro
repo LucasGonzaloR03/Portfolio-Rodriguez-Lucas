@@ -18,6 +18,9 @@ import LinkButton from "./LinkButton.astro"
 import Nodejs from "./icons/Nodejs.astro"
 import Docker from "./icons/Docker.astro"
 import DotNet from "./icons/DotNet.astro"
+import Angular from "./icons/Angular.astro"
+import SpringBoot from "./icons/SpringBoot.astro"
+import Brain from "./icons/Brain.astro"
 import { Image } from "astro:assets"
 
 const TAGS = {
@@ -101,8 +104,32 @@ const TAGS = {
     class: "bg-[#512BD4] text-white",
     icon: DotNet,
   },
+  SPRING: {
+    name: "Spring Boot",
+    class: "bg-[#6DB33F] text-white",
+    icon: SpringBoot,
+  },
+  ANGULAR: {
+    name: "Angular",
+    class: "bg-[#DD0031] text-white",
+    icon: Angular,
+  },
+  IA: {
+    name: "IA / OpenAI",
+    class: "bg-[#10A37F] text-white",
+    icon: Brain,
+  },
 }
 const PROJECTS = [
+  {
+    title: "TicketDesk AI — Helpdesk full-stack con IA",
+    description: "Demo full-stack de helpdesk con backend Java 21/Spring Boot y frontend Angular 21. Incluye autenticación JWT con roles, PostgreSQL + pgvector, migraciones Flyway, importación de tickets desde PDF y correos .eml, sugerencias de IA con proveedores reales o modo mock, detección de duplicados por similitud, panel de agente e interfaz responsive. Cubierto por 105 tests de backend y 16 de frontend, con CI separada para ambos proyectos.",
+    github: "https://github.com/LucasGonzaloR03/ticketdesk-ai",
+    githubFrontend: "https://github.com/LucasGonzaloR03/ticketdesk-web-angular",
+    live: "https://ticketdesk-web-angular.vercel.app/",
+    image: "/projects/ticketdesk-ai.webp",
+    tags: [TAGS.SPRING, TAGS.ANGULAR, TAGS.TYPESCRIPT, TAGS.POSTGRESQL, TAGS.IA, TAGS.DOCKER],
+  },
   {
     title: "Uberto Backend — Plataforma de reservas de viajes",
     description: "API REST en Kotlin/Spring Boot que gestiona usuarios, choferes y viajes en tiempo real. Combina cuatro bases de datos: PostgreSQL para datos transaccionales, MongoDB para perfiles de usuario, Redis para cachear rutas frecuentes y Neo4j para recomendaciones basadas en grafos. Incluye autenticación con Spring Security y arquitectura modular por capas.",
@@ -163,6 +190,7 @@ const PROJECTS = [
   },
 ]
 const englishCopy = [
+  ["TicketDesk AI — Full-stack AI helpdesk", "Full-stack helpdesk demo built with Java 21/Spring Boot and Angular 21. It includes JWT authentication with roles, PostgreSQL + pgvector, Flyway migrations, ticket imports from PDF and .eml files, AI field suggestions with real providers or a mock mode, duplicate detection by similarity, an agent dashboard, and a fully responsive UI. Covered by 105 backend and 16 frontend tests, with separate CI pipelines for both projects."],
   ["Uberto Backend — Ride booking platform", "Kotlin/Spring Boot REST API for managing users, drivers, and rides in real time. It combines four databases: PostgreSQL for transactional data, MongoDB for user profiles, Redis to cache frequently used routes, and Neo4j for graph-based recommendations. Includes Spring Security authentication and a layered modular architecture."],
   ["Uberto Frontend — Web interface for ride management", "React + TypeScript single-page app that consumes the Uberto REST API. It lets users manage riders, drivers, and trips through a responsive Material UI interface. Includes state management, asynchronous API calls, component testing, and a clear separation between logic and presentation."],
   ["MusicAr — Music group management", "Kotlin application for modeling music groups, roles, instruments, and contracts. The focus was object-oriented design: inheritance, polymorphism, typed collections, and unit test coverage. This academic project helped shape my foundation in domain design."],
@@ -173,6 +201,7 @@ const englishCopy = [
   ["Turnos API — Booking with JWT and concurrency control", "REST API in C#/.NET 10 for managing professionals, services, opening hours, and appointment booking. It implements JWT authentication with roles, validation, and consistent error responses. Bookings use concurrency control to prevent double reservations. Includes 21 unit tests, Swagger docs in production, and a Render deployment backed by PostgreSQL on Neon."],
 ]
 const portugueseCopy = [
+  ["TicketDesk AI — Helpdesk full-stack com IA", "Demo full-stack de helpdesk com backend Java 21/Spring Boot e frontend Angular 21. Inclui autenticação JWT por papéis, PostgreSQL + pgvector, migrações Flyway, importação de tickets por PDF e arquivos .eml, sugestões de IA com provedores reais ou modo mock, detecção de duplicatas por similaridade, painel do agente e interface totalmente responsiva. Coberto por 105 testes no backend e 16 no frontend, com CI separada para os dois projetos."],
   ["Uberto Backend — Plataforma de reserva de viagens", "API REST em Kotlin/Spring Boot para gerenciar usuários, motoristas e viagens em tempo real. Combina quatro bancos de dados: PostgreSQL para dados transacionais, MongoDB para perfis de usuário, Redis para armazenar rotas frequentes em cache e Neo4j para recomendações baseadas em grafos. Inclui autenticação com Spring Security e arquitetura modular em camadas."],
   ["Uberto Frontend — Interface web para gestão de viagens", "Aplicação de página única em React + TypeScript que consome a API REST do Uberto. Permite gerenciar passageiros, motoristas e viagens por meio de uma interface responsiva feita com Material UI. Inclui gerenciamento de estado, chamadas assíncronas à API, testes de componentes e separação entre lógica e apresentação."],
   ["MusicAr — Gestão de grupos musicais", "Aplicação em Kotlin para modelar grupos musicais, funções, instrumentos e contratos. O foco foi o design orientado a objetos: herança, polimorfismo, coleções tipadas e cobertura de testes unitários. Projeto acadêmico que contribuiu para minha formação em design de domínio."],
@@ -187,7 +216,7 @@ const { lang = "es" } = Astro.props
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, github, live }, index) => (
+    PROJECTS.map(({ image, title, description, tags, github, githubFrontend, live }, index) => (
       (() => { const [displayTitle, displayDescription] = lang === "en" ? englishCopy[index] : lang === "pt" ? portugueseCopy[index] : [title, description]; return (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
@@ -234,6 +263,12 @@ const { lang = "es" } = Astro.props
                 <LinkButton href={github}>
                   <GitHub class="size-6" />
                   {lang === "en" ? "Source code" : lang === "pt" ? "Código-fonte" : "Código"}
+                </LinkButton>
+              )}
+              {githubFrontend && (
+                <LinkButton href={githubFrontend}>
+                  <GitHub class="size-6" />
+                  Frontend
                 </LinkButton>
               )}
               {live && (
