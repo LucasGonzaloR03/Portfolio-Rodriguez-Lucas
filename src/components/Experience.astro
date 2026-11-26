@@ -10,7 +10,7 @@ const experiences: ExperienceItem[] = [
   {
     title: "Ayudante de Cátedra — Algoritmos 3",
     company: "Universidad Nacional de San Martín (UNSAM)",
-    period: "2025 — Presente",
+    period: "Agosto 2025 — Noviembre 2025",
     description: [
       "Asistencia docente en la materia de desarrollo web full-stack (frontend y backend).",
       "Guía a estudiantes en tecnologías como React, TypeScript, Node.js y diseño de APIs REST.",
@@ -18,25 +18,25 @@ const experiences: ExperienceItem[] = [
     ],
   },
   {
-    title: "Ayudante de Cátedra — Programación con Herramientas Modernas (PHM)",
+    title: "Tutor — Algoritmos 3 y Programación con Herramientas Modernas (PHM)",
     company: "Universidad Nacional de San Martín (UNSAM)",
-    period: "2026 — Presente",
+    period: "Marzo 2026 — Presente",
     description: [
-      "Asistencia docente en bases de datos relacionales y no relacionales (PostgreSQL, MongoDB, Redis).",
-      "Soporte en arquitecturas backend y tecnologías modernas como Spring Boot y Docker.",
-      "Resolución de consultas técnicas y acompañamiento en proyectos de los estudiantes.",
+      "Tutoría en desarrollo web full-stack (frontend y backend) para Algoritmos 3 y en bases de datos relacionales y no relacionales (PostgreSQL, MongoDB, Redis) para PHM.",
+      "Acompaño a estudiantes en React, TypeScript, Node.js, Spring Boot y Docker, y en el diseño de APIs REST.",
+      "Resuelvo consultas técnicas y guío a los estudiantes en el desarrollo de sus proyectos finales.",
     ],
   },
 ]
 const { lang = "es" } = Astro.props
 const english: ExperienceItem[] = [
-  { title: "Teaching Assistant — Algorithms 3", company: "National University of San Martín (UNSAM)", period: "2025 — Present", description: ["Teaching support for a full-stack web development course covering frontend and backend.", "Guide students in React, TypeScript, Node.js, and REST API design.", "Review assignments and assess final projects."] },
-  { title: "Teaching Assistant — Programming with Modern Tools (PHM)", company: "National University of San Martín (UNSAM)", period: "2026 — Present", description: ["Teaching support for relational and non-relational databases (PostgreSQL, MongoDB, Redis).", "Support students with backend architecture and modern tools such as Spring Boot and Docker.", "Answer technical questions and guide students through their projects."] },
+  { title: "Teaching Assistant — Algorithms 3", company: "National University of San Martín (UNSAM)", period: "August 2025 — November 2025", description: ["Teaching support for a full-stack web development course covering frontend and backend.", "Guide students in React, TypeScript, Node.js, and REST API design.", "Review assignments and assess final projects."] },
+  { title: "Tutor — Algorithms 3 and Programming with Modern Tools (PHM)", company: "National University of San Martín (UNSAM)", period: "March 2026 — Present", description: ["Tutoring in full-stack web development (frontend and backend) for Algorithms 3 and in relational and non-relational databases (PostgreSQL, MongoDB, Redis) for PHM.", "Guide students in React, TypeScript, Node.js, Spring Boot, and Docker, as well as REST API design.", "Answer technical questions and support students throughout their final projects."] },
 ]
 const items = lang === "en" ? english : experiences
 const portuguese: ExperienceItem[] = [
-  { title: "Auxiliar de Ensino — Algoritmos 3", company: "Universidade Nacional de San Martín (UNSAM)", period: "2025 — Presente", description: ["Apoio ao ensino em disciplina de desenvolvimento web full-stack, com conteúdo de frontend e backend.", "Oriento estudantes em React, TypeScript, Node.js e design de APIs REST.", "Corrijo trabalhos práticos e avalio projetos finais."] },
-  { title: "Auxiliar de Ensino — Programação com Ferramentas Modernas (PHM)", company: "Universidade Nacional de San Martín (UNSAM)", period: "2026 — Presente", description: ["Apoio ao ensino de bancos de dados relacionais e não relacionais (PostgreSQL, MongoDB, Redis).", "Dou suporte em arquitetura backend e ferramentas modernas, como Spring Boot e Docker.", "Respondo a dúvidas técnicas e acompanho os projetos dos estudantes."] },
+  { title: "Auxiliar de Ensino — Algoritmos 3", company: "Universidade Nacional de San Martín (UNSAM)", period: "Agosto 2025 — Novembro 2025", description: ["Apoio ao ensino em disciplina de desenvolvimento web full-stack, com conteúdo de frontend e backend.", "Oriento estudantes em React, TypeScript, Node.js e design de APIs REST.", "Corrijo trabalhos práticos e avalio projetos finais."] },
+  { title: "Tutor — Algoritmos 3 e Programação com Ferramentas Modernas (PHM)", company: "Universidade Nacional de San Martín (UNSAM)", period: "Março 2026 — Presente", description: ["Tutoria em desenvolvimento web full-stack (frontend e backend) em Algoritmos 3 e em bancos de dados relacionais e não relacionais (PostgreSQL, MongoDB, Redis) em PHM.", "Oriento estudantes em React, TypeScript, Node.js, Spring Boot e Docker, além do design de APIs REST.", "Respondo a dúvidas técnicas e acompanho os projetos finais dos estudantes."] },
 ]
 const displayItems = lang === "pt" ? portuguese : items
 ---

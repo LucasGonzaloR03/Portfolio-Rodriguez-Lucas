@@ -9,6 +9,11 @@ import CurriculumIcon from "./icons/Curriculum.astro"
 const { lang = "es" } = Astro.props
 const en = lang === "en"
 const pt = lang === "pt"
+const cvUrl = en
+  ? "https://n9.cl/lucas-gonzalo-rodriguez-software-developer"
+  : pt
+    ? "https://n9.cl/lucas-gonzalo-rodriguez-desenvolvedor-de-software"
+    : "https://n9.cl/lucas-gonzalo-rodriguez-desarrollador-de-software"
 ---
 
 <div class="max-w-xl">
@@ -38,7 +43,7 @@ const pt = lang === "pt"
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
-    {en ? <><strong>Full-stack developer</strong> and UNSAM graduate based in Buenos Aires, Argentina. I also work as a <strong>teaching assistant</strong> in web development and database courses. I enjoy building quality software with Kotlin, Spring Boot, React, and more. I’m looking for my first professional role and an opportunity to keep growing.</> : pt ? <><strong>Desenvolvedor full-stack</strong> formado pela UNSAM, em Buenos Aires, Argentina. Também atuo como <strong>auxiliar de ensino</strong> em disciplinas de desenvolvimento web e bancos de dados. Gosto de criar software de qualidade com Kotlin, Spring Boot, React e outras tecnologias. Busco minha primeira oportunidade profissional para continuar crescendo.</> : <><strong>Desarrollador Full-Stack</strong> egresado de la UNSAM (Buenos Aires, Argentina) y <strong>Ayudante de Cátedra</strong> en materias de desarrollo web y bases de datos. Apasionado por construir software de calidad con Kotlin, Spring Boot, React y más. Busco mi primer puesto profesional para seguir creciendo.</>}
+    {en ? <><strong>Software developer</strong> and UNSAM graduate based in Buenos Aires, Argentina. I also work as a <strong>tutor</strong> in web development and database courses. I enjoy building quality software with Kotlin, Spring Boot, React, and more. I’m looking for my first professional role and an opportunity to keep growing.</> : pt ? <><strong>Desenvolvedor de software</strong> formado pela UNSAM, em Buenos Aires, Argentina. Também atuo como <strong>tutor</strong> em disciplinas de desenvolvimento web e bancos de dados. Gosto de criar software de qualidade com Kotlin, Spring Boot, React e outras tecnologias. Busco minha primeira oportunidade profissional para continuar crescendo.</> : <><strong>Desarrollador de software</strong> egresado de la UNSAM (Buenos Aires, Argentina) y <strong>Tutor</strong> en materias de desarrollo web y bases de datos. Apasionado por construir software de calidad con Kotlin, Spring Boot, React y más. Busco mi primer puesto profesional para seguir creciendo.</>}
   </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="#contacto" target="_self">
@@ -53,7 +58,7 @@ const pt = lang === "pt"
       <GitHubIcon class="size-4" />
       GitHub
     </SocialPill>
-    <SocialPill href="https://bit.ly/Lucas-Gonzalo-Rodriguez-Desarrollador-Full-Stack">
+    <SocialPill href={cvUrl}>
       <CurriculumIcon className="size-4" />
       {en ? "Resume" : pt ? "Currículo" : "Curriculum"}
     </SocialPill>
